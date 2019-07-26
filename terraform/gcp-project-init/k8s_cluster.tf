@@ -63,7 +63,7 @@ resource "null_resource" "kube-delay" {
   }
 
   provisioner "local-exec" {
-    command = "sleep 30"
+    command = "sleep 45"
   }
 }
 

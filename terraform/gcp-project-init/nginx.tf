@@ -9,3 +9,13 @@ resource "helm_release" "nginx-ingress" {
   }
   depends_on = ["null_resource.helm-setup"]
 }
+
+data "external" "nginx-lb-endpoint" {
+  depends_on = ["helm_release.nginx-ingress"]
+
+  program = [
+    "bash",
+    "${path.module}/files/get_nginx_endpoint.sh",
+    local.k8s_context,
+  ]
+}
